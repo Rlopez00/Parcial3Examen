@@ -18,3 +18,5 @@ Incluye almacenamiento persistente:
 1. Crear el Secret para la contraseña de MySQL:
    ```bash
    kubectl create secret generic mysql-pass --from-literal=password=TuPasswordSegura
+   
+http://a3a73446276a54d04bdc2bcbc29dae9a-1366777965.us-east-1.elb.amazonaws.com/wp-admin/install.php
