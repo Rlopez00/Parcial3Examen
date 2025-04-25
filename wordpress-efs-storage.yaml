@@ -1,0 +1,26 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata: { name: efs-sc }
+provisioner: efs.csi.aws.com
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata: { name: wordpress-efs-pv }
+spec:
+  capacity: { storage: 5Gi }
+  volumeMode: Filesystem
+  accessModes: [ReadWriteMany]
+  storageClassName: efs-sc
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: "fs-0cd61a4ff5e3c4b58::fsap-02ee42e6b77bb4c8f" # ← revisa doble
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: { name: wordpress-efs-pvc }
+spec:
+  accessModes: [ReadWriteMany]
+  storageClassName: efs-sc
+  resources:
+    requests: { storage: 5Gi }
